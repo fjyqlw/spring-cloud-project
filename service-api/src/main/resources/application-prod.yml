@@ -1,0 +1,41 @@
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.188.131:9000/eureka/
+server:
+  port: 9003
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: service-api
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.188.131:3306/auth_cloud?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf-8
+    username: lian.wei
+    password: lian.wei
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    resource:
+      user-info-uri: http://192.168.188.131:9002/uaa/user/current
+      prefer-token-info: false
+    client:
+      clientId: myapp
+      clientSecret: 12345678
+      access-token-uri: http://192.168.188.131:9002/uaa/oauth/token
+      userAuthorizationUri: http://192.168.188.131:9002/uaa/oauth/authorize
+      grant-type: password
+      scope: read write
+management:
+  security:
+    enabled: false

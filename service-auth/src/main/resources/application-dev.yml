@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: service-auth
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/auth_cloud?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: lian.wei
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: lian.wei
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 10000
+        max-idle: 50
+        max-wait: -1
+        min-idle: 0
+
+server:
+  port: 9002
+  servlet:
+    context-path: /auth
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9000/eureka/
+    #配置Swagger相关信息
+    instance:
+      prefer-ip-address: true
+      instanceId: ${spring.cloud.client.ipAddress}:${server.port}
+
+#security:
+#  oauth2:
+#    resource:
+#      filter-order: 3
+# basic:
+#   enabled: false
+

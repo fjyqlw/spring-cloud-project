@@ -1,0 +1,40 @@
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
+server:
+  port: 9003
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: service-api
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/auth_cloud?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: lian.wei
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+
+
+service:
+  auth:
+    host: service-auth
+    port: 9002
+    context: auth
+    full-base-uri: http://${service.auth.host}:${service.auth.port}/${service.auth.context}
+    check-token-uri: ${service.auth.full-base-uri}/oauth/check_token
+    access-token-uri: ${service.auth.full-base-uri}/oauth/token
+    userAuthorizationUri: ${service.auth.full-base-uri}/oauth/authorize
+    client-id: acffeba2a33f440cad678f891efdcb83
+    client-secret: 8222c5fe9787416ab51d5e27c9c322fe
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000

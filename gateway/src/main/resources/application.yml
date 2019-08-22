@@ -1,0 +1,35 @@
+service-auth:
+  uri: lb://service-auth
+service-api:
+  uri: lb://service-api
+
+spring:
+  application:
+    name: gateway-client
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: route_service_one
+#          uri: ${service-auth.uri}
+#          predicates:
+#            - Path=/uaa/**
+#        - id: route_service_two
+#          uri: ${service-api.uri}
+#          predicates:
+#            - Path=/api/**
+
+server:
+  port: 9001
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.188.131:9000/eureka/
+  instance:
+    prefer-ip-address: true
